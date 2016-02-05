@@ -14,7 +14,7 @@ CREATE TABLE Klient (
     Login VARCHAR(255) UNIQUE NOT NULL,
     Haslo VARCHAR(255) NOT NULL
 );
--- niezbedny klient
+-- niezbedny klient, atrapa dla Rachunku, kiedy zostaje zamkniety
 INSERT INTO Klient (Imie, Nazwisko, Login, Haslo) VALUES ('Atrapa', 'Atrapa', 'Atrapa', 'atrapa');
 
 
@@ -109,9 +109,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
+--przykladowe konta
 INSERT INTO Rodzaj (Nazwa, Odsetki, Co_ile_naliczane) VALUES 
     ('DobreKonto', 0.10, 10),
     ('Ekstra', 0.50, 1),
     ('Slabe', -0.50, 2)
 ;
+
+-- W projekcie uzywam samych zapytac z WHERE id = x lub WHERE nazwa = x, gdzie nazwa jest unikalna lub biore cale tabele 
+-- bez warunku. Jedyne co przychodzi mi do glowy to tworzenie co miesiac nowej tabeli w stylu Operacja_wykonana_2016_01( 
+-- id_Operacja_wykonana REFERENCES Operacja_wykonana(id)) dla Operacja_wykonana i w przegladaniu historii rachunku zrobic 
+-- wczytywanie z okresloneo przedzialu czasu(w miesiacach). Zdecydowanie liczba rekordow Operacje_wykonane bedzie znaczaco 
+-- wieksza od reszty i tu nalezy szukac optymalizacji.
