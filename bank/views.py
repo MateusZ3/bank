@@ -113,7 +113,7 @@ def otworz(request):
                     return index(request, 'Nie mozna wykonac zadanej operacji')
             else:
                 info = 'Podany numer rachunku jest zajety, wybierz inny'
-        return render(request, 'bank/otworz.html', {'all_rodzaj': tuple(all_rodzaj), 'info': info})
+        return render(request, 'bank/otworz.html', {'all_rodzaj': tuple(all_rodzaj), 'info': info, 'login': klient.login})
     else:
         return HttpResponseRedirect('/login/')
 
