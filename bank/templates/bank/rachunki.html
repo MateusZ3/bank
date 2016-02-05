@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'bank/css/bank.css' %}">
+
+<table class="wyniki">
+    <tr>
+        <th> NUMER </th>
+        <th> SALDO </th>
+        <th> RODZAJ </th>
+    </tr>
+    {% for rachunek in rachunki %}
+        <tr>
+            <td> <a href="{% url 'bank:rachunek' rachunek.numer %}"> {{ rachunek.numer }} </a> </td>
+            <td> {{ rachunek.saldo }} </td>
+            <td> <a href="{% url 'bank:rodzaj' rachunek.rodzaj.id %}"> {{ rachunek.rodzaj.nazwa }} </a> </td>
+        </tr>
+    {% endfor %}
+</table>

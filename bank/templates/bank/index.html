@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'bank/css/bank.css' %}">
+    </head>
+    <header>
+        <h1> BANK </h1>
+    </header>
+    <nav>
+        <table>
+            <tr>
+                <th> MENU </th>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:index' %}"> Start </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:rachunki' %}"> Rachunki </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:otworz' %}"> Otworz Rachunek </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:oferta' %}"> Oferta </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:kolejny_dzien' %}"> Kolejny Dzien </a> </td>
+            </tr>
+        </table>
+    </nav>
+    <aside>
+        <table>
+            <tr>
+                <th> UZYTKOWNIK </th>
+            </tr>
+            <tr>
+                <td> Jestes: {{ login }} </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:logout' %}"> Logout </a> </td>
+            </tr>
+        </table>
+    </aside>
+    <div id="main"> <!-- <main> nie jest obsługiwany przez Internet Explorer, nawet wersję 11 -->
+        {{ main }}
+    </div>
+    <footer>
+        Mateusz Zielinski
+    </footer>
+</html>

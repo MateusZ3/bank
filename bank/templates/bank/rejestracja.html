@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'bank/css/bank.css' %}">
+    </head>
+    <header>
+        <h1> BANK </h1>
+    </header>
+    <nav>
+        <table>
+            <tr>
+                <th> MENU </th>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:index' %}"> Start </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:rachunki' %}"> Rachunki </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:otworz' %}"> Otworz Rachunek </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:oferta' %}"> Oferta </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:kolejny_dzien' %}"> Kolejny Dzien </a> </td>
+            </tr>
+        </table>
+    </nav>
+    <aside>
+        <table>
+            <tr>
+                <th> UZYTKOWNIK </th>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:login' %}"> Login </a> </td>
+            </tr>
+        </table>
+    </aside>
+    <div id="main"> <!-- <main> nie jest obsługiwany przez Internet Explorer, nawet wersję 11 -->
+        <p>
+        <form action="{% url 'bank:rejestracja' %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td> <label for="imie"> Imie: </label> </td>
+                    <td class="rejestracja"> <input id="imie" type="text" required="required" name="imie"> </td>
+                </tr>
+                <tr>
+                    <td> <label for="nazwisko"> Nazwisko: </label> </td>
+                    <td class="rejestracja"> <input id="nazwisko" type="text" required="required" name="nazwisko"> </td>
+                </tr>
+                <tr>
+                    <td> <label for="login"> Login: </label> </td>
+                    <td class="rejestracja"> <input id="login" type="text" required="required" name="login"> </td>
+                </tr>
+                <tr>
+                    <td> <label for="haslo"> Haslo: </label> </td>
+                    <td class="rejestracja"> <input id="haslo" type="text" required="required" name="haslo"> </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="rejestracja"> <input type="submit" value="OK"> </td>
+                </tr>
+            </table>
+        </form>
+        </p>
+        <p>
+            {{ info }}
+        </p>
+    </div>
+    <footer>
+        Mateusz Zielinski
+    </footer>
+</html>

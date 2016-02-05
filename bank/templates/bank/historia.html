@@ -1,0 +1,14 @@
+<table class="wyniki">
+    <tr>
+        <th> DATA </th>
+        <th> OPERACJA </th>
+        <th> ZMIANA </th>
+    </tr>
+    {% for operacja_wykonana in operacje_wykonane %}
+        <tr>
+            <td> {{ operacja_wykonana.data }} </a> </td>
+            <td> {{ operacja_wykonana.operacja.nazwa }} </td>
+            <td> {{ operacja_wykonana.zmiana }} </td>
+        </tr>
+    {% endfor %}
+</table>

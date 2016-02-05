@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'bank/css/bank.css' %}">
+    </head>
+    <header>
+        <h1> BANK </h1>
+    </header>
+    <nav>
+        <table>
+            <tr>
+                <th> MENU </th>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:index' %}"> Start </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:rachunki' %}"> Rachunki </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:otworz' %}"> Otworz Rachunek </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:oferta' %}"> Oferta </a> </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:kolejny_dzien' %}"> Kolejny Dzien </a> </td>
+            </tr>
+        </table>
+    </nav>
+    <aside>
+        <table>
+            <tr>
+                <th> UZYTKOWNIK </th>
+            </tr>
+            <tr>
+                <td> Jestes: {{ login }} </td>
+            </tr>
+            <tr>
+                <td> <a href="{% url 'bank:logout' %}"> Logout </a> </td>
+            </tr>
+        </table>
+    </aside>
+    <div id="main"> <!-- <main> nie jest obsługiwany przez Internet Explorer, nawet wersję 11 -->
+        <table class="wyniki">
+            <tr>
+                <th> NUMER </th>
+                <th> SALDO </th>
+                <th> RODZAJ </th>
+            </tr>
+            <tr>
+                <td> {{ rachunek.numer }} </td>
+                <td> {{ rachunek.saldo }} </td>
+                <td> {{ rachunek.rodzaj.nazwa }} </td>
+            </tr>
+        </table>
+        <p>
+            <form action="{% url 'bank:rachunek' rachunek.numer %}" method="post">
+                {% csrf_token %}
+                <label for="login"> Kwota: </label>
+                <input id="kwota" type="number" step="0.01" min="1" max="2000000000" required="required" name="kwota">
+                <select id="operacja" name="operacja">
+                    <option value="wplata"> Wplata </option>
+                    <option value="wyplata"> Wyplata </option>
+                </select>
+                <input type="submit" value="OK">
+            </form>
+        </p>
+        <p>
+            <a href="{% url 'bank:historia' rachunek.numer %}"> Historia </a>
+        </p>
+        <p>
+            <a href="{% url 'bank:zamknij' rachunek.numer %}"> Zakmnij </a>
+        </p>
+        <p>
+            <h2> {{ info }} </h2>
+        </p>
+    </div>
+    <footer>
+        Mateusz Zielinski
+    </footer>
+</html>
